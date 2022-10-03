@@ -3,6 +3,12 @@ import {StyleSheet, View, Text, Button, TextInput} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
+  const [submit, setSubmit] = useState(false);
+
+  const handlePress = () => {
+    setSubmit(!submit);
+  };
+
   return (
     <View style={styles.body}>
       <Text style={styles.text}>Write Your Name:</Text>
@@ -17,8 +23,15 @@ const App = () => {
         // editable={false}
         // secureTextEntry
       />
-      <Button title="Submit" />
-      <Text style={styles.text}>Your Name: {name}</Text>
+      {submit && (
+        <Text style={styles.text}>Your are registered as: {name}</Text>
+      )}
+      {/* <Button
+        title={submit ? 'clear' : 'Submit'}
+        onPress={handlePress}
+        // disabled={submit}
+      /> */}
+      <
     </View>
   );
 };
