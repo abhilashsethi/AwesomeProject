@@ -17,6 +17,7 @@ const App = () => {
         // editable={false}
         // secureTextEntry
       />
+      <Button title="Submit" />
       <Text style={styles.text}>Your Name: {name}</Text>
     </View>
   );
