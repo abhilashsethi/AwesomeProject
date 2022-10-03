@@ -1,12 +1,28 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, Button, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ToastAndroid,
+} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
   const [submit, setSubmit] = useState(false);
 
   const handlePress = () => {
-    setSubmit(!submit);
+    if (name.length > 3) {
+      setSubmit(!submit);
+    } else {
+      // Alert.alert('Warning', 'The name must longer than 3', [
+      //   {text: 'OK', onPress: () => console.warn('ok')},
+      // ]);
+      ToastAndroid.show('The name must longer than 3', ToastAndroid.LONG);
+    }
   };
 
   return (
@@ -23,15 +39,17 @@ const App = () => {
         // editable={false}
         // secureTextEntry
       />
-      {submit && (
+      {submit ? (
         <Text style={styles.text}>Your are registered as: {name}</Text>
-      )}
+      ) : null}
       {/* <Button
         title={submit ? 'clear' : 'Submit'}
         onPress={handlePress}
         // disabled={submit}
       /> */}
-      <
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.text}>{submit ? 'clear' : 'Submit'}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -52,6 +70,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
+  },
+  button: {
+    backgroundColor: '#00ff00',
+    width: 200,
+    height: 50,
+    alignItems: 'center',
   },
 });
 
